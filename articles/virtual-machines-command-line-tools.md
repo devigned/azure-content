@@ -1,6 +1,6 @@
 <properties
-	pageTitle="Using the Azure Cross-Platform Command-Line Interface"
-	description="Learn about using the command-line tools for Mac, Linux, and Windows to manage Azure."
+	pageTitle="Using the Azure Command-Line Interface (Azure CLI)"
+	description="Learn about using the Azure CLI for Mac, Linux, and Windows to manage Azure."
 	services="web-sites, virtual-machines, mobile-services, cloud-services"
 	documentationCenter=""
 	authors="squillace"
@@ -13,14 +13,14 @@
 	ms.tgt_pltfrm="command-line-interface"
 	ms.devlang="na"
 	ms.topic="article"
-	ms.date="03/10/2015" 
+	ms.date="03/10/2015"
 	ms.author="rasquill"/>
 
-#Using the Azure Cross-Platform Command-Line Interface
+#Using the Azure Command-Line Interface (Azure CLI)
 
 This tool provides functionality for creating, deploying, and managing virtual machines, websites, Azure Mobile Services, and many other Azure services from Mac, Linux, and Windows desktops. This functionality is similar to that provided by the Windows PowerShell cmdlets that are installed with the Azure SDKs for .NET, Node.JS, and PHP.
 
-For installation instructions, see [Install and Configure the Azure Cross-Platform Command-Line Interface](xplat-cli.md).
+For installation instructions, see [Install and Configure the Azure CLI](azure-cli.md).
 
 Optional parameters are shown in square brackets (for example, [parameter]). All other parameters are required.
 
@@ -724,7 +724,7 @@ This command will generate a custom deployment script
 
 **site create [options] [name]**
 
-This command creates a new web app and local directory. 
+This command creates a new web app and local directory.
 
 	~$ azure site create mysite
 	info:   Executing command site create

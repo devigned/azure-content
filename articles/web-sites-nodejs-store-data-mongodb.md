@@ -1,20 +1,20 @@
-<properties 
-	pageTitle="Node.js website with MongoDB on a VM - Azure tutorial" 
-	description="How to use MongoDB to store data in a Node.js application hosted on Azure." 
-	services="web-sites, virtual-machines" 
-	documentationCenter="nodejs" 
-	authors="wpickett" 
-	writer="MikeWasson" 
-	manager="wpickett" 
+<properties
+	pageTitle="Node.js website with MongoDB on a VM - Azure tutorial"
+	description="How to use MongoDB to store data in a Node.js application hosted on Azure."
+	services="web-sites, virtual-machines"
+	documentationCenter="nodejs"
+	authors="wpickett"
+	writer="MikeWasson"
+	manager="wpickett"
 	editor=""/>
 
-<tags 
-	ms.service="web-sites" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="nodejs" 
-	ms.topic="article" 
-	ms.date="02/19/2015" 
+<tags
+	ms.service="web-sites"
+	ms.workload="web"
+	ms.tgt_pltfrm="na"
+	ms.devlang="nodejs"
+	ms.topic="article"
+	ms.date="02/19/2015"
 	ms.author="mwasson"/>
 
 
@@ -26,12 +26,12 @@ You will learn:
 
 * How to set up a virtual machine running Ubuntu and MongoDB from the VM Depot.
 * How to access MongoDB from a node application
-* How to use the Cross-Platform Tools for Azure to create an Azure Website
+* How to use the Azure CLI to create an Azure Website
 
 By following this tutorial, you will build a simple web-based task-management application that allows creating, retrieving and completing tasks. The tasks are stored in MongoDB.
 
 > [AZURE.NOTE] This tutorial uses an instance of MongoDB installed on a virtual machine. If you would rather use a hosted MongoDB instance provided  by MongoLabs, see <a href="/develop/nodejs/tutorials/website-with-mongodb-mongolab/">Create a Node.js Application on Azure with MongoDB using the MongoLab Add-On</a>.
- 
+
 The project files for this tutorial will be stored in a directory named **tasklist** and the completed application will look similar to the following:
 
 ![A web page displaying an empty tasklist][node-mongo-finished]
@@ -54,7 +54,7 @@ Additionally, the [Git] must be available from the command-line in your developm
 
 After you have created the virtual machine in Azure and installed MongoDB, be sure to remember the DNS name of the virtual machine ("testlinuxvm.cloudapp.net", for example) and the external port for MongoDB that you specified in the endpoint.  You will need this information later in the tutorial.-->
 
-While it is possible to create a new VM, and then install MongoDB into it following the [MongoDB installation guides][installguides], most of this work has already been performed by the community, and is available in the VM Depot. The following steps demonstrate how to use an image from VM Depot that already has Mongo DB installed and configured. 
+While it is possible to create a new VM, and then install MongoDB into it following the [MongoDB installation guides][installguides], most of this work has already been performed by the community, and is available in the VM Depot. The following steps demonstrate how to use an image from VM Depot that already has Mongo DB installed and configured.
 
 > [AZURE.NOTE] The community image used by this tutorial stores MongoDB data on the OS disk. While this is sufficient for tutorial purposes, storing MongoDB data on a data disk will provide greater performance. For steps on creating a new VM, including a data disk, and storing MongoDB data on the data disk, see [Install MongoDB on Linux on Azure][mongodbonazure].
 
@@ -71,7 +71,7 @@ While it is possible to create a new VM, and then install MongoDB into it follow
 	Click the arrow at the bottom to proceed to the next screen.
 
 3. Select the region and storage account that will be used to store the VHD for this image. Click the check mark to continue.
-	
+
 	![screenshot of choose a storage account][selectstorage]
 
 	> [AZURE.NOTE] This will start a copy process that copies the image from the VM Depot to the specified storage account. This can take quite a bit of time, 15 minutes or longer.
@@ -109,7 +109,7 @@ While it is possible to create a new VM, and then install MongoDB into it follow
 	* Protocol - TCP
 	* Public port - 28017
 	* Private port - 28017
-	
+
 	Finally, select the check mark to configure the virtual machine.
 
 	![screenshot of the endpoint configuration][vmendpoint]
@@ -141,15 +141,15 @@ In this section you will create a new Node application on your development envir
 2. Enter the following command to install the express command.
 
 	npm install express-generator -g
- 
+
 	> [AZURE.NOTE] When using the '-g' parameter on some operating systems, you may receive an error of ___Error: EPERM, chmod '/usr/local/bin/express'___ and a request to try running the account as an administrator. If this occurs, use the `sudo` command to run npm at a higher privilege level.
 
     The output of this command should appear similar to the following:
 
 		express-generator@4.0.0 C:\Users\username\AppData\Roaming\npm\node_modules\express-generator
 		├── mkdirp@0.3.5
-		└── commander@1.3.2 (keypress@0.1.0)                                                                         
- 
+		└── commander@1.3.2 (keypress@0.1.0)
+
 	> [AZURE.NOTE] The '-g' parameter used when installing the express module installs it globally. This is done so that we can access the ___express___ command to generate website scaffolding without having to type in additional path information.
 
 4. To create the scaffolding which will be used for this application, use the **express** command:
@@ -175,10 +175,10 @@ In this section you will create a new Node application on your development envir
 		   create : ./public/javascripts
 		   create : ./bin
 		   create : ./bin/www
-		
+
 		   install dependencies:
 		     $ cd . && npm install
-		
+
 		   run the app:
 		     $ DEBUG=my-application ./bin/www
 
@@ -199,7 +199,7 @@ In this section you will create a new Node application on your development envir
 ###Install additional modules
 
 The **package.json** file is one of the files created by the **express** command. This file contains a list of additional modules that are required for an Express application. Later, when you deploy this application to an Azure Website, this file will be used to determine which modules need to be installed on Azure to support your application.
-	
+
 1. From the **tasklist** folder, use the following to install the modules described in the **package.json** file:
 
         npm install
@@ -207,19 +207,19 @@ The **package.json** file is one of the files created by the **express** command
     The output of this command should appear similar to the following:
 
 		debug@0.7.4 node_modules\debug
-		
+
 		cookie-parser@1.0.1 node_modules\cookie-parser
 		├── cookie-signature@1.0.3
 		└── cookie@0.1.0
-		
+
 		morgan@1.0.0 node_modules\morgan
 		└── bytes@0.2.1
-		
+
 		body-parser@1.0.2 node_modules\body-parser
 		├── qs@0.6.6
 		├── raw-body@1.1.4 (bytes@0.3.0)
 		└── type-is@1.1.0 (mime@1.2.11)
-		
+
 		express@4.0.0 node_modules\express
 		├── methods@0.1.0
 		├── parseurl@1.0.1
@@ -237,7 +237,7 @@ The **package.json** file is one of the files created by the **express** command
 		├── type-is@1.0.0 (mime@1.2.11)
 		├── accepts@1.0.0 (negotiator@0.3.0, mime@1.2.11)
 		└── serve-static@1.0.1 (send@0.1.4)
-		
+
 		jade@1.3.1 node_modules\jade
 		├── character-parser@1.2.0
 		├── commander@2.1.0
@@ -245,7 +245,7 @@ The **package.json** file is one of the files created by the **express** command
 		├── monocle@1.1.51 (readdirp@0.2.5)
 		├── constantinople@2.0.0 (uglify-js@2.4.13)
 		├── with@3.0.0 (uglify-js@2.4.13)
-		└── transformers@2.1.0 (promise@2.0.0, css@1.0.8, uglify-js@2.2.5)                                                                
+		└── transformers@2.1.0 (promise@2.0.0, css@1.0.8, uglify-js@2.2.5)
 
 	This installs all of the default modules used by an Express application.
 
@@ -264,7 +264,7 @@ The **package.json** file is one of the files created by the **express** command
 		├── mpromise@0.4.3
 		├── ms@0.1.0
 		├── mquery@0.5.3
-		└── mongodb@1.3.23 (kerberos@0.0.3, bson@0.2.5)         
+		└── mongodb@1.3.23 (kerberos@0.0.3, bson@0.2.5)
 
     > [AZURE.NOTE] You can safely ignore any message about installing the C++ bson parser.
 
@@ -332,7 +332,7 @@ In this section you will extend the basic application created by the **express**
     	    });
     	  	res.redirect('/');
   		  },
-  
+
 
   		  completeTask: function(req,res) {
     		var completedTasks = req.body;
@@ -406,14 +406,14 @@ In this section you will extend the basic application created by the **express**
 		  input(type="submit", value="Update tasks")
 		hr
 		form(action="/addtask", method="post")
-		  table(border="1") 
+		  table(border="1")
 		    tr
-		      td Item Name: 
-		      td 
+		      td Item Name:
+		      td
 		        input(name="item[name]", type="textbox")
 		    tr
-		      td Item Category: 
-		      td 
+		      td Item Category:
+		      td
 		        input(name="item[category]", type="textbox")
 		  input(type="submit", value="Add item")
 
@@ -460,15 +460,15 @@ To test the application on your local machine, perform the following steps:
 
 ##Deploy your application to Azure
 
-The steps in this section use the Azure command-line tools to create a new Azure Website, and then use Git to deploy your application. To perform these steps you must have an Azure subscription.
+The steps in this section use the Azure Command-Line Interface to create a new Azure Website, and then use Git to deploy your application. To perform these steps you must have an Azure subscription.
 
 > [AZURE.NOTE] These steps can also be performed by using the Azure portal. For steps on using the Azure portal to deploy a Node.js application, see <a href="/develop/nodejs/tutorials/create-a-website-(mac)/">Create and deploy a Node.js application to an Azure Website</a>.
 
 > [AZURE.NOTE] If this is the first Azure Website you have created, you must use the Azure portal to deploy this application.
 
-###Install the Azure cross-platform command-line interface
+###Install the Azure Command-Line Interface
 
-The Azure Cross-Platform Command-Line Interface (xplat-cli) allows you to perform management operations for Azure services. If you have not already installed and configured the xplat-cli on your development environment, see [Install and configure the Azure Cross-Platform Command-Line Interface][xplatcli] for instructions.
+The Azure Command-Line Interface (Azure CLI) allows you to perform management operations for Azure services. If you have not already installed and configured the Azure CLI on your development environment, see [Install and configure the Azure CLI][azurecli] for instructions.
 
 ###Create an Azure Website
 
@@ -477,15 +477,15 @@ The Azure Cross-Platform Command-Line Interface (xplat-cli) allows you to perfor
 2. Use the following command to create a new Azure Website. Replace 'myuniquesitename' with a unique site name for your website. This value is used as part of the URL for the resulting website.
 
 		azure site create myuniquesitename --git
-		
+
 	You will be prompted for the datacenter that the site will be located in. Select the datacenter geographically close to your location.
-	
+
 	The `--git` parameter will create a Git repository locally in the **tasklist** folder if none exists. It will also create a [Git remote] named 'azure', which will be used to publish the application to Azure. It will create an [iisnode.yml], which contains settings used by Azure to host node applications. Finally it will also create a .gitignore file to exclude the node-modules folder for being published to .git.
-	
+
 	> [AZURE.NOTE] If this command is ran from a directory that already contains a Git repository, it will not re-initialize the directory.
-	
+
 	> [AZURE.NOTE] If the '--git' parameter is omitted, yet the directory contains a Git repository, the 'azure' remote will still be created.
-	
+
 	Once this command has completed, you will see output similar to the following. Note that the line beginning with **Created website at** contains the URL for the website.
 
 		info:   Executing command site create
@@ -521,8 +521,8 @@ This will create a new application setting for the website, which will be used t
 3. When pushing the latest Git repository changes to the Azure Website, you must specify that the target branch is **master** as this is used for the website content.
 
 		git push azure master
-	
-	You will see output similar to the following. As the deployment takes place Azure will download all npm modules. 
+
+	You will see output similar to the following. As the deployment takes place Azure will download all npm modules.
 
 		Counting objects: 17, done.
 		Delta compression using up to 8 threads.
@@ -539,7 +539,7 @@ This will create a new application setting for the website, which will be used t
 		remote: Deployment successful.
 		To https://username@mongodbtasklist.azurewebsites.net/MongoDBTasklist.git
  		 * [new branch]      master -> master
- 
+
 4. Once the push operation has completed, browse to the website by using the `azure site browse` command to view your application.
 
 ##Next steps
@@ -552,9 +552,9 @@ To learn how to secure MongoDB, see [MongoDB Security][mongosecurity].
 
 ##Additional resources
 
-[Azure command-line tool for Mac and Linux]    
-[Create and deploy a Node.js application to Azure Web Sites]    
-[Publishing to Azure Web Sites with Git]    
+[Azure Command-Line Interface]
+[Create and deploy a Node.js application to Azure Web Sites]
+[Publishing to Azure Web Sites with Git]
 
 [mongosecurity]: http://docs.mongodb.org/manual/security/
 [node]: http://nodejs.org
@@ -566,7 +566,7 @@ To learn how to secure MongoDB, see [MongoDB Security][mongosecurity].
 [Git remote]: http://git-scm.com/docs/git-remote
 [azure-sdk-for-node]: https://github.com/WindowsAzure/azure-sdk-for-node
 [iisnode.yml]: https://github.com/WindowsAzure/iisnode/blob/master/src/samples/configuration/iisnode.yml
-[Azure command-line tool for Mac and Linux]: virtual-machines-command-line-tools.md
+[Azure Command-Line Interface]: virtual-machines-command-line-tools.md
 [Azure Developer Center]: /develop/nodejs/
 [Create and deploy a Node.js application to Azure Web Sites]: /develop/nodejs/tutorials/create-a-website-(mac)/
 [Publishing to Azure Web Sites with Git]: /develop/nodejs/common-tasks/publishing-with-git/
@@ -580,7 +580,7 @@ To learn how to secure MongoDB, see [MongoDB Security][mongosecurity].
 [installguides]: http://docs.mongodb.org/manual/installation/
 [azureportal]: https://manage.windowsazure.com/
 [mongodocs]: http://docs.mongodb.org/manual/
-[xplatcli]: xplat-cli.md
+[azurecli]: azure-cli.md
 
 [selectdepo]: ./media/web-sites-nodejs-store-data-mongodb/browsedepot.png
 [selectedimage]: ./media/web-sites-nodejs-store-data-mongodb/selectimage.png
@@ -591,4 +591,4 @@ To learn how to secure MongoDB, see [MongoDB Security][mongosecurity].
 [vmconfig]: ./media/web-sites-nodejs-store-data-mongodb/vmconfig.png
 [vmendpoint]: ./media/web-sites-nodejs-store-data-mongodb/endpoints.png
 [sshazure]: http://www.windowsazure.com/documentation/articles/linux-use-ssh-key/
-[mongodbonazure]: http://docs.mongodb.org/ecosystem/tutorial/install-mongodb-on-linux-in-azure/ 
+[mongodbonazure]: http://docs.mongodb.org/ecosystem/tutorial/install-mongodb-on-linux-in-azure/

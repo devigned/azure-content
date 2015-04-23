@@ -1,25 +1,25 @@
-<properties 
-	pageTitle="Create a PHP web app in Azure App Service" 
-	description="Learn how to create a PHP web app in Azure App Service" 
-	documentationCenter="php" 
-	services="app-service\web" 
-	editor="mollybos" 
-	manager="wpickett" 
+<properties
+	pageTitle="Create a PHP web app in Azure App Service"
+	description="Learn how to create a PHP web app in Azure App Service"
+	documentationCenter="php"
+	services="app-service\web"
+	editor="mollybos"
+	manager="wpickett"
 	authors="tfitzmac"/>
 
-<tags 
-	ms.service="app-service-web" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="PHP" 
-	ms.topic="article" 
-	ms.date="03/24/2015" 
+<tags
+	ms.service="app-service-web"
+	ms.workload="web"
+	ms.tgt_pltfrm="na"
+	ms.devlang="PHP"
+	ms.topic="article"
+	ms.date="03/24/2015"
 	ms.author="tomfitz"/>
 
 # Create a PHP web app in Azure App Service
 
 ## Overview
-This article will show you how to create a PHP web app in [Azure App Service] by using the [Azure Portal], the [Azure Command Line Tools for Mac and Linux][xplat-tools], or the [Azure PowerShell cmdlets][powershell-cmdlets].
+This article will show you how to create a PHP web app in [Azure App Service] by using the [Azure Portal], the [Azure Command-Line Interface][Azure CLI], or the [Azure PowerShell cmdlets][powershell-cmdlets].
 
 In general, creating a PHP web app is no different that creating *any* web app in Azure App Service. By default, PHP is enabled for all web apps. For information about configuring PHP (or providing your own customized PHP runtime), see [Configure PHP in Azure App Service Web Apps].
 
@@ -30,27 +30,27 @@ Each option described below shows you how to create a web app in a shared hostin
 <a name="portal"></a>
 ## Create a PHP web app using the Azure Portal
 
-When you create a PHP web app in the Azure Portal, you have three options: 
+When you create a PHP web app in the Azure Portal, you have three options:
 
 - **Quick create** - see [How to: Create a web app Using the Azure Portal](web-sites-create-deploy.md#createawebsiteportal)
-- **Create with database** - see [Create a PHP-MySQL web app in Azure App Service and deploy using Git] 
+- **Create with database** - see [Create a PHP-MySQL web app in Azure App Service and deploy using Git]
 - **From the Marketplace** - see [Create a WordPress web app in Azure App Service]
 
-<a name="XplatTools"></a>
-## Create a PHP web app using the Azure Command Line Tools for Mac and Linux
+<a name="AzureTools"></a>
+## Create a PHP web app using the Azure Command-Line Interface (Azure CLI)
 
-To create a PHP web app using the Azure Command Line Tools for Mac and Linux do the following:
+To create a PHP web app using the Azure CLI do the following:
 
-1. Install the Azure Command Line Tools by following the instructions here: [How to install the Azure Command Line Tools for Mac and Linux](xplat-cli.md#install).
+1. Install the Azure CLI by following the instructions here: [How to install the Azure CLI](azure-cli.md#install).
 
-1. Download and import your publish settings file by following the instructions here: [How to download and import publish settings](xplat-cli.md#configure).
+1. Download and import your publish settings file by following the instructions here: [How to download and import publish settings](azure-cli.md#configure).
 
 1. Run the following command from a command prompt:
 
 		azure site create MyWebAppName
 
 The URL for the newly created web app will be  `http://MyWebAppName.azurewebsites.net`.  
- 
+
 Note that you can execute the `azure site create` command with any of the following options:
 
 * `--location [location name]`. This option allows you to specify the location of the data center in which your web app is created (e.g. "West US"). If you omit this option, you will be promted to choose a location.
@@ -71,7 +71,7 @@ To create a PHP web app using the Azure PowerShell cmdlets, do the following:
 		New-AzureWebsite MyWebAppName
 
 The URL for the newly created web app will be  `http://MyWebAppName.azurewebsites.net`.  
- 
+
 Note that you can execute the `New-AzureWebsite` command with any of the following options:
 
 * `-Location [location name]`. This option allows you to specify the location of the data center in which your web app is created (e.g. "West US"). If you omit this option, you will be promted to choose a location.
@@ -98,7 +98,7 @@ For end-to-end tutorials, visit the [PHP Developer Center - Tutorials](/develop/
 
 [Azure App Service]: http://go.microsoft.com/fwlink/?LinkId=529714
 [Azure Portal]: http://go.microsoft.com/fwlink/?LinkId=529715
-[xplat-tools]: xplat-cli.md
+[Azure CLI]: azure-cli.md
 [powershell-cmdlets]: powershell-install-configure.md
 [Configure PHP in Azure App Service Web Apps]: web-sites-php-configure.md
 [Create a PHP-MySQL web app in Azure App Service and deploy using Git]: web-sites-php-mysql-deploy-use-git.md

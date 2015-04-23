@@ -20,7 +20,7 @@
 
 [AZURE.INCLUDE [hive-selector](../includes/hdinsight-selector-use-hive.md)]
 
-In this document, you will learn how to use Curl to run Hive queries on a Hadoop on Azure HDInsight cluster. 
+In this document, you will learn how to use Curl to run Hive queries on a Hadoop on Azure HDInsight cluster.
 
 Curl is used to demonstrate how you can interact with HDInsight by using raw HTTP requests to run, monitor, and retrieve the results of Hive queries. This works by using the WebHCat REST API (formerly known as Templeton) provided by your HDInsight cluster.
 
@@ -39,9 +39,9 @@ To complete the steps in this article, you will need the following:
 ##<a id="curl"></a>Run Hive queries by using Curl
 
 > [AZURE.NOTE] When using Curl or any other REST communication with WebHCat, you must authenticate the requests by providing the user name and password for the HDInsight cluster administrator. You must also use the cluster name as part of the Uniform Resource Identifier (URI) used to send the requests to the server.
-> 
+>
 > For the commands in this section, replace **USERNAME** with the user to authenticate to the cluster, and replace **PASSWORD** with the password for the user account. Replace **CLUSTERNAME** with the name of your cluster.
-> 
+>
 > The REST API is secured via <a href="http://en.wikipedia.org/wiki/Basic_access_authentication" target="_blank">basic authentication</a>. You should always make requests by using Secure HTTP (HTTPS) to help ensure that your credentials are securely sent to the server.
 
 1. From a command line, use the following command to verify that you can connect to your HDInsight cluster:
@@ -74,15 +74,15 @@ To complete the steps in this article, you will need the following:
     * **-d** - Since `-G` is not used, the request defaults to the POST method. `-d` specifies the data values that are sent with the request.
 
         * **user.name** - The user that is running the command.
-        
+
         * **execute** - The HiveQL statements to execute.
-        
+
         * **statusdir** - The directory that the status for this job will be written to.
 
     These statements perform the following actions:
 
     * **DROP TABLE** - Deletes the table and the data file, if the table already exists.
-    
+
     * **CREATE EXTERNAL TABLE** - Creates a new 'external' table in Hive. External tables store only the table definition in Hive. The data is left in the original location.
 
 		> [AZURE.NOTE] External tables should be used when you expect the underlying data to be updated by an external source, such as an automated data upload process, or by another MapReduce operation, but always want Hive queries to use the latest data.
@@ -90,9 +90,9 @@ To complete the steps in this article, you will need the following:
 		> Dropping an external table does **not** delete the data, only the table definition.
 
     * **ROW FORMAT** - Tells Hive how the data is formatted. In this case, the fields in each log are separated by a space.
-    
+
     * **STORED AS TEXTFILE LOCATION** - Tells Hive where the data is stored (the example/data directory), and that it is stored as text.
-    
+
     * **SELECT** - Selects a count of all rows where column **t4** contains the value **[ERROR]**. This should return a value of **3** as there are three rows that contain this value.
 
     > [AZURE.NOTE] Notice that the spaces between HiveQL statements are replaced by the `+` character when used with Curl. Quoted values that contain a space, such as the delimiter, should not be replaced by `+`.
@@ -107,11 +107,11 @@ To complete the steps in this article, you will need the following:
 
 	If the job has finished, the state will be **SUCCEEDED**.
 
-    > [AZURE.NOTE] This Curl request returns a JavaScript Object Notation (JSON) document with information about the job; jq is used to retrieve only the state value. 
+    > [AZURE.NOTE] This Curl request returns a JavaScript Object Notation (JSON) document with information about the job; jq is used to retrieve only the state value.
 
 4. Once the state of the job has changed to **SUCCEEDED**, you can retrieve the results of the job from Azure Blob storage. The `statusdir` parameter passed with the query contains the location of the output file; in this case, **wasb:///example/curl**. This address stores the output of the job in the **example/curl** directory on the default storage container used by your HDInsight cluster.
 
-    You can list and download these files by using the <a href="../xplat-cli/" target="_blank">Azure Cross-Platform Command-Line Interface (xplat-cli)</a>. For example, to list files in **example/curl**, use the following command:
+    You can list and download these files by using the <a href="../azure-cli/" target="_blank">Azure  Command-Line Interface (Azure CLI)</a>. For example, to list files in **example/curl**, use the following command:
 
 		azure storage blob list <container-name> example/curl
 
@@ -135,7 +135,7 @@ To complete the steps in this article, you will need the following:
     * **INSERT OVERWRITE ... SELECT** - Selects rows from the **log4jLogs** table that contain **[ERROR]**, then inserts the data into the **errorLogs** table.
     * **SELECT** - Selects all rows from the new **errorLogs** table.
 
-7. Use the job ID returned to check the status of the job. Once it has succeeded, use xplat-cli as described previously to download and view the results. The output should contain three lines, all of which contain **[ERROR]**.
+7. Use the job ID returned to check the status of the job. Once it has succeeded, use Azure CLI as described previously to download and view the results. The output should contain three lines, all of which contain **[ERROR]**.
 
 
 ##<a id="summary"></a>Summary

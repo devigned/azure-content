@@ -223,7 +223,7 @@ this will output something like `5112500ae3b842c8b9c604889f8753c3__OpenLogic-Cen
         chkconfig mysql off
 		waagent -deprovision
 
-11. Capture the VM through the portal. (Currently, [issue #1268 in the Azure CLI] tools describes the fact that images captured by the xplat-cli tools do not capture the attached data disks.)
+11. Capture the VM through the portal. (Currently, [issue #1268 in the Azure CLI] tools describes the fact that images captured by the Azure CLI tools do not capture the attached data disks.)
 
 	- Shutdown the machine through the portal
     - Click on Capture and specify the image name as **mariadb-galera-image** and provide a  description and check "I have run waagent".
@@ -366,7 +366,7 @@ You may want to take a look at [another way to cluster MySQL on Linux] and ways 
 <!--Link references-->
 [Galera]: http://galeracluster.com/products/
 [MariaDBs]: https://mariadb.org/en/about/
-[Azure CLI]: http://azure.microsoft.com/documentation/articles/xplat-cli/
+[Azure CLI]: http://azure.microsoft.com/documentation/articles/azure-cli/
 [Azure CLI command reference]: http://azure.microsoft.com/documentation/articles/virtual-machines-command-line-tools/
 [create an SSH key for authentication]:http://www.jeff.wilcox.name/2013/06/secure-linux-vms-with-ssh-certificates/
 [performance tuning strategy]: http://azure.microsoft.com/documentation/articles/virtual-machines-linux-optimize-mysql-perf/

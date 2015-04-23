@@ -42,7 +42,7 @@ Web Apps supports applications created in a variety of programming languages. Fo
 
 3. From the command-line, verify that you are in the root of your Git repository. Then use the following command to add the **index.html** file to the repository:
 
-		git add index.html 
+		git add index.html
 
 	> [AZURE.NOTE] You can find help for any git command by typing -help or --help after the command. For example, for parameter options for the add command, type 'git add -help' for command-line help or 'git add --help' for more detailed help.
 
@@ -114,7 +114,7 @@ Use the following steps to publish your web app to Azure using Local Git:
 
 	> [AZURE.NOTE] The repository created for your web app expects push requests to target the <strong>master</strong> branch of its repository, which will then be used as the content of the web app.
 
-2. Go back to your web app's blade in the Azure portal. **No deployment found** should be changed to **Active Deployment** with a log entry of your most recent push. 
+2. Go back to your web app's blade in the Azure portal. **No deployment found** should be changed to **Active Deployment** with a log entry of your most recent push.
 
 	![](./media/publishing-with-git/azure4-deployed.png)
 
@@ -147,13 +147,13 @@ Deploying files from either GitHub, CodePlex, or BitBucket requires that you hav
 2. In your web app's blade in the portal, scroll down to the **Deployment** section and click **Set up continous deployment**. Click **Choose Source**, then click **GitHub**, for example.  
 
 	![](./media/publishing-with-git/azure6-setup-github.png)
-	
-2. In the **Continous Deployment** blade, click **Authorization**, then click **Authorize**. The Azure portal will redirect you to the repository site to complete the authorization process. 
+
+2. In the **Continous Deployment** blade, click **Authorization**, then click **Authorize**. The Azure portal will redirect you to the repository site to complete the authorization process.
 
 4. When you're done, go back to the Azure portal and click **OK** in the **Authorization** blade.
 
 5. In the **Continous Deployment** blade, choose the organization, project, and branch you want to deploy from. When you're done, click **OK**.
-  
+
 	![](./media/publishing-with-git/azure7-setup-github-configure.png)
 
 	> [AZURE.NOTE] When enabling continuous deployment with GitHub or BitBucket, both public and private projects will be displayed.
@@ -200,7 +200,7 @@ Once you have set up your repository as described, and configured your web app i
 
 Continuous deployment can be disabled from the **Deployments** blade. From your web app's blade, in the **Deployment** section, click Active Deployment. Then click **Disconnect**.
 
-![git-DisconnectFromGitHub](./media/publishing-with-git/azure5-disconnect.png)	
+![git-DisconnectFromGitHub](./media/publishing-with-git/azure5-disconnect.png)
 
 After answering **Yes** to the confirmation message, you can return to your web app's blade and click **Set up continuous deployment** if you would like to set up publishing from another source.
 
@@ -214,7 +214,7 @@ The following are errors or problems commonly encountered when using Git to publ
 
 **Cause**: This error can occur if the web app is not up and running.
 
-**Resolution**: Start the web app in the Azure portal. Git deployment will not work unless the web app is running. 
+**Resolution**: Start the web app in the Azure portal. Git deployment will not work unless the web app is running.
 
 
 ****
@@ -282,7 +282,7 @@ The following are errors or problems commonly encountered when using Git to publ
 [Git website]: http://git-scm.com
 [Installing Git]: http://git-scm.com/book/en/Getting-Started-Installing-Git
 [How to use PowerShell for Azure]: ../articles/install-configure-powershell.md
-[How to use the Azure Command-Line Tools for Mac and Linux]: ../articles/xplat-cli.md
+[How to use the Azure Command-Line Tools for Mac and Linux]: ../articles/azure-cli.md
 [Git Documentation]: http://git-scm.com/documentation
 
 [portal-select-website]: ./media/publishing-with-git/git-select-website.png
