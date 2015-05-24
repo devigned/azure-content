@@ -13,7 +13,7 @@
 	ms.topic="article"
 	ms.tgt_pltfrm="vm-linux"
 	ms.workload="infrastructure-services"
-	ms.date="02/02/2015" 
+	ms.date="02/02/2015"
 	ms.author="rasquill"/>
 # Using the Docker VM Extension from the Azure Command-line Interface (Azure CLI)
 This topic describes how to create a VM with the Docker VM Extension from the Azure CLI on any platform. [Docker](https://www.docker.com/) is one of the most popular virtualization approaches that uses [Linux containers](http://en.wikipedia.org/wiki/LXC) rather than virtual machines as a way of isolating data and computing on shared resources. You can use the Docker VM extension to the [Azure Linux Agent](virtual-machines-linux-agent-user-guide.md) to create a Docker VM that hosts any number of containers for your applications on Azure. To see a high-level discussion of containers and their advantages, see the [Docker High Level Whiteboard](http://channel9.msdn.com/Blogs/Regular-IT-Guy/Docker-High-Level-Whiteboard).
@@ -26,7 +26,7 @@ This topic describes how to create a VM with the Docker VM Extension from the Az
 
 
 ## <a id='How to use the Docker VM Extension with Azure'>How to use the Docker VM Extension with Azure</a>
-To use the Docker VM extension with Azure, you must install a version of the [Azure Command-Line Interface](https://github.com/Azure/azure-sdk-tools-xplat) (called the **Azure CLI** in this topic) higher than 0.8.6 (as of this writing the current version is 0.8.10). You can install the Azure CLI on Mac, Linux, and Windows.
+To use the Docker VM extension with Azure, you must install a version of the [Azure Command-Line Interface](https://github.com/Azure/azure-sdk-tools-xplat) (Azure CLI) higher than 0.8.6 (as of this writing the current version is 0.8.10). You can install the Azure CLI on Mac, Linux, and Windows.
 
 > [AZURE.NOTE] Although you can install the Azure CLI on Microsoft Windows, Docker was built with kernel dependencies specific to Linux. Therefore, to use Windows as a Docker client you must host a full Linux distribution as a virtual machine inside Hyper-V or another hypervisor. Once you have done that, you can use the Azure CLI and the Docker commands in this document and those of Docker. Docker itself has a setup program for Windows, [Boot2Docker](https://docs.docker.com/installation/windows/), which you can also use to automate this same setup.
 
@@ -39,7 +39,7 @@ The complete process to use Docker on Azure is simple:
 > [AZURE.NOTE] The Azure CLI is currently the only way to create a Docker-controlled VM on Azure to host Docker containers.
 
 ### Install the Azure Command-Line Interface (Azure CLI)
-To install and configure the Azure CLI, see [How to install the Azure Command-Line Interface](xplat-cli.md#install). To confirm the installation, type `azure` at the command prompt and after a short moment you should see the Azure CLI ASCII art, which lists the basic commands available to you. If the installation worked correctly, you should be able to type `azure help vm` and see that one of the listed commands is "docker".
+To install and configure the Azure CLI, see [How to install the Azure CLI](xplat-cli.md#install). To confirm the installation, type `azure` at the command prompt and after a short moment you should see the Azure CLI ASCII art, which lists the basic commands available to you. If the installation worked correctly, you should be able to type `azure help vm` and see that one of the listed commands is "docker".
 
 > [AZURE.NOTE] If you are using an Ubuntu 14.04 LTS installation, that image has a slightly different node installation that may require some extra work. One suggestion that seems to work well is located [here](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server) in the **How To Install Using a PPA** section, which describes how to install the most recent version of nodejs directly and seems to work well on an Ubuntu 14.04 LTS distribution.
 
